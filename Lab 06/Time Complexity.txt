@@ -1,0 +1,28 @@
+Linked List vs Array Performance for Insertion and Deletion
+
+ 1. Linked List
+ Insertion:
+ At the beginning: O(1)  Directly modify the head pointer to insert a new node.
+ At the end: O(n)  Traverse the entire list to find the last node and insert the new node.
+ At a given position: O(n)  Traverse to the desired position and insert the node.
+
+ Deletion:
+ At the beginning: O(1)  Simply modify the head pointer to remove the first node.
+ At the end: O(n)  Traverse to the second last node and modify its next pointer to delete the last node.
+ At a given position: O(n)  Traverse to the node before the one to be deleted and modify the pointers accordingly.
+
+ 2. Array
+ Insertion:
+ At the beginning: O(n)  Shift all elements one position to the right to make space for the new element.
+ At the end: O(1)  Insert the element at the end of the array.
+ At a given position: O(n)  Shift all elements after the insertion point to the right.
+
+ Deletion:
+ At the beginning: O(n)  Shift all elements one position to the left to fill the gap.
+ At the end: O(1)  Simply remove the element at the end.
+ At a given position: O(n)  Shift all elements after the deletion point to the left to fill the gap.
+
+ Summary:
+ Linked lists are generally more efficient for insertion and deletion at the beginning or middle of the list because no shifting is required.
+ Arrays have an advantage in random access (O(1)) compared to linked lists (O(n)).
+ Arrays are more efficient for appending at the end (O(1)) compared to linked lists (O(n)).
