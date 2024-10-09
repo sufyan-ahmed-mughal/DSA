@@ -1,5 +1,6 @@
 #include <iostream>
 using namespace std;
+
 class Node
 {
 public:
@@ -13,6 +14,7 @@ public:
         data = value;
     }
 };
+
 void InsertAtTail(Node *&head, int value)
 {
     Node *n = new Node(value);
@@ -29,6 +31,7 @@ void InsertAtTail(Node *&head, int value)
     temp->next = n;
     n->prev = temp;
 }
+
 void InsertAtHead(Node *&head, int value)
 {
     Node *n = new Node(value);
@@ -41,6 +44,21 @@ void InsertAtHead(Node *&head, int value)
     head->prev = n;
     head = n;
 }
+void DeleteNodeAtHead(Node *&head)
+{
+    if (head == NULL)
+    {
+        cout << "List is empty" << endl;
+        return;
+    }
+    Node *temp = head;
+    head = head->next;
+    if (head != NULL)
+        head->prev = NULL;
+    delete temp;
+}
+
+
 void InsertPosition(Node *&head, int value, int pos)
 {
     if (head == NULL)
@@ -73,6 +91,31 @@ void InsertPosition(Node *&head, int value, int pos)
         n->prev = temp;
     }
 }
+
+
+void DeleteNodeAtTail(Node *&head)
+{
+    if (head == NULL)
+    {
+        cout << "List is empty" << endl;
+        return;
+    }
+    Node *temp = head;
+    while (temp->next != NULL)
+    {
+        temp = temp->next;
+    }
+    if (temp->prev != NULL)
+    {
+        temp->prev->next = NULL;
+    }
+    else
+    {
+        head = NULL;
+    }
+    delete temp;
+}
+
 void DeleteNode(Node *&head, int pos)
 {
     if (head == NULL)
@@ -82,31 +125,25 @@ void DeleteNode(Node *&head, int pos)
     }
     if (head->data == pos)
     {
-
-        Node *temp = head;
-        head = head->next;
-        head->prev = NULL;
-        delete temp;
+        DeleteNodeAtHead(head);
         return;
     }
 
     Node *temp = head;
-
     while (temp->data != pos)
     {
         temp = temp->next;
     }
+
     if (temp->next == NULL)
     {
-        Node *todelete = temp;
-        temp->prev->next = NULL;
-        temp->prev = NULL;
-        delete todelete;
+        DeleteNodeAtTail(head);
         return;
     }
 
     temp->prev->next = temp->next;
     temp->next->prev = temp->prev;
+    delete temp;
 }
 
 void Display(Node *&head)
@@ -128,24 +165,31 @@ int main()
     InsertAtTail(head, 102);
     InsertAtTail(head, 103);
     Display(head);
-    cout<<"Insert At Head"<<endl;
+    
+    cout << "Insert At Head" << endl;
     InsertAtHead(head, 111);
     Display(head);
-    cout<<"Insert At Tail"<<endl;
+    
+    cout << "Insert At Tail" << endl;
     InsertAtTail(head, 222);
     Display(head);
-    cout<<"Insert At Specific Location"<<endl;
+    
+    cout << "Insert At Specific Location" << endl;
     InsertPosition(head, 104, 103);
     Display(head);
-    cout<<"Delete At Head"<<endl;
-    DeleteNode(head, 111);
+    
+    cout << "Delete At Head" << endl;
+    DeleteNodeAtHead(head);
     Display(head);
-    cout<<"Delete At Specific Location"<<endl;
+    
+    cout << "Delete At Specific Location" << endl;
     DeleteNode(head, 103);
     Display(head);
-    cout<<"Delete At Tail"<<endl;
-    DeleteNode(head, 222);
+    
+    cout << "Delete At Tail" << endl;
+    DeleteNodeAtTail(head);
     Display(head);
+    
     system("pause");
     return 0;
 }
